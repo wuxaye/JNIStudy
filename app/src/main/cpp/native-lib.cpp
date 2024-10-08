@@ -1,10 +1,18 @@
 #include <jni.h>
 #include <string>
+#include <android/log.h>
+
+//#define 是预处理指令，用于定义宏，可以是常量、表达式或代码片段。
+#define LOG_TAG "MyNativeLib"
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
 extern "C"
 JNIEXPORT jint JNICALL
 Java_com_xaye_myjni_JNI_passInt(JNIEnv *env, jobject thiz, jint x, jint y) {
-    return x + y;
+    int result = x + y;
+    LOGI("调用了passInt，返回值：%d",result);
+    return result;
 }
 
 extern "C"
@@ -23,6 +31,7 @@ Java_com_xaye_myjni_JNI_passString(JNIEnv *env, jobject thiz, jstring str) {
 
     // 释放 jstring 的资源
     env->ReleaseStringUTFChars(str, inputCStr);
+    LOGI("调用了passString，返回值：%s",outputString.c_str());
 
     // 将处理后的 std::string 转换回 jstring
     return env->NewStringUTF(outputString.c_str());
@@ -43,7 +52,7 @@ Java_com_xaye_myjni_JNI_passArray(JNIEnv *env, jobject thiz, jintArray array) {
 
     // 提交更改并释放数组元素 , 显式调用 ReleaseIntArrayElements，以确保这些更改被反映到原始 Java 数组中。
     env->ReleaseIntArrayElements(array, p, 0); // 第三个参数为 0 表示更改已经提交
-
+    LOGI("调用了passArray，返回数组长度：%d",length);
     // 返回修改后的数组
     return array;
 }

@@ -5,6 +5,8 @@ import java.lang.reflect.Array;
 /**
  * Author xaye
  *
+ * Java与C++ 数据传递
+ *
  * @date: 2024/9/30
  */
 public class JNI {
