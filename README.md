@@ -1,12 +1,13 @@
 # JNIStudy
 
-## 功能
+## 代码包含功能
 
 - 传递int数据
 - 传递String数据
 - 传递Array数据
+- ...
 
-基础知识
+## 基础知识
 ### Java和Native之间基本数据类型转换
 |     **Java类型** |     **JNI类型** |
 |:---------------|:--------------|
@@ -43,11 +44,9 @@ Java_com_zqf_jnitest_MainActivity_stringFromJNI(JNIEnv *env, jobject /* this */)
     std::string hello = "Hello NDK";
     return env->NewStringUTF(hello.c_str());
 }
-
-
 ```
 ### 解析：
-- `extern “C”`** ：**避免编绎器按照C++的方式去编绎C函数
+- `extern “C”`：避免编绎器按照C++的方式去编绎C函数
 1. C不支持函数的重载，编译之后函数名不变；
 2. C++支持函数的重载（这点与Java一致），编译之后函数名会改变；
 - `JNIEXPORT`：JNI重要标记关键字，不能少（VS结译能通过，运行会报错〕/(AS 运行不会报错)，规则(标记为该方法可以被外部调用)
