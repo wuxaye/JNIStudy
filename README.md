@@ -4,6 +4,8 @@
 
 次项目持续更新中，欢迎Star！
 
+@[toc]
+
 ## 代码包含功能
 
 - 传递int数据
@@ -99,7 +101,6 @@ public boolean isEven(int number); //签名：isEven(I)Z
 public float add(float a, double b); //签名：add(FD)F
 
 public void processLong(long value); //签名：processLong(J)V
-
 ```
 - 对象类型：用 `L` 开头，后面跟类的完全限定名，最后以 `;` 结束。例如：
     - `Ljava/lang/String;` 表示 `String` 类型
