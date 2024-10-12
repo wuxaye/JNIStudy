@@ -1,5 +1,9 @@
 package com.xaye.myjni;
 
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
 /**
  * Author xaye
  *
@@ -9,4 +13,28 @@ public class JNI2 {
     static {
         System.loadLibrary("mysecondlib");
     }
+
+    public Context context;
+
+    public JNI2(Context context) {
+        this.context = context;
+    }
+
+    public void printHelloWorld() {
+        Toast.makeText(context, "Hello World From Java!", Toast.LENGTH_SHORT).show();
+    }
+
+    public int add(int x, int y) {
+        Log.d("JNI2", "add: " + (x + y));
+        return x + y;
+    }
+
+    public void printString(String str) {
+        Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+    }
+
+    public native void cCallJavaVoidMethod();
+    public native void cCallJavaIntMethod();
+    public native void cCallJavaStringMethod();
 }
+

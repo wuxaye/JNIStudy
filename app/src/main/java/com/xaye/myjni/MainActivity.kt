@@ -12,12 +12,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var jni: JNI
 
+    private lateinit var jni2: JNI2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         jni = JNI()
+
+        jni2 = JNI2(applicationContext)
         //传递int
         binding.btnInt.setOnClickListener {
             val result = jni.passInt(3,4)
@@ -34,6 +38,22 @@ class MainActivity : AppCompatActivity() {
         binding.btnArray.setOnClickListener {
             val result = jni.passArray(intArrayOf(1,2,3))
             Toast.makeText(this, result.contentToString(),Toast.LENGTH_SHORT).show()
+        }
+
+        //-------------------------------------------------------
+        //调用Java的void方法
+        binding.btnFunVoid.setOnClickListener {
+            jni2.cCallJavaVoidMethod()
+        }
+
+        //调用Java的int方法
+        binding.btnFunInt.setOnClickListener {
+             jni2.cCallJavaIntMethod()
+        }
+
+        //调用Java的String方法
+        binding.btnFunString.setOnClickListener {
+            jni2.cCallJavaStringMethod()
         }
     }
 

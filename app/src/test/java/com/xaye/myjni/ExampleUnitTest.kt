@@ -2,8 +2,6 @@ package com.xaye.myjni
 
 import org.junit.Test
 
-import org.junit.Assert.*
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -12,6 +10,22 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        //1.获取类的字节码
+
+        //1.获取类的字节码
+        val clazz = com.xaye.myjni.Test::class.java
+        //2.通过字节码获取方法
+        val method = clazz.getDeclaredMethod("print", String::class.java)
+        //3.通过字节码创建对象
+        val test = clazz.newInstance()
+        //4.调用方法
+        method.invoke(test, "hello world")
+    }
+}
+
+
+internal class Test {
+    fun print(str: String?) {
+        println(str)
     }
 }
