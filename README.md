@@ -75,6 +75,62 @@ Java_com_zqf_jnitest_MainActivity_stringFromJNI(JNIEnv *env, jobject /* this */)
 - `env` 是一个指向 `JNIEnv` 的指针，必须使用 `->` 来调用 `NewStringUTF` 方法
 
 
+### Java 方法签名的表示
+在JNI中，调用Java方法时，需要提供方法签名，以确定方法参数和返回值的类型。在JNI中，方法签名由方法名、参数类型和返回值类型组成。
+
+- 基本数据类型：
+    - `V`：void
+    - `Z`：boolean
+    - `B`：byte
+    - `C`：char
+    - `S`：short
+    - `I`：int
+    - `J`：long
+    - `F`：float
+    - `D`：double
+
+- 示例
+
+```
+public void doNothing();  //签名：doNothing()V
+
+public boolean isEven(int number); //签名：isEven(I)Z
+
+public float add(float a, double b); //签名：add(FD)F
+
+public void processLong(long value); //签名：processLong(J)V
+
+```
+- 对象类型：用 `L` 开头，后面跟类的完全限定名，最后以 `;` 结束。例如：
+    - `Ljava/lang/String;` 表示 `String` 类型
+    - `Ljava/util/List;` 表示 `List` 类型
+- 数组类型：用 `[` 表示，例如：
+    - `[I` 表示 `int` 数组
+    - `[[Ljava/lang/String;` 表示 `String` 类型的二维数组
+- 示例
+
+```
+//签名：stringLength(Ljava/lang/String;)I
+public int stringLength(String str);  
+
+//签名：containsItem(Ljava/util/List;Ljava/lang/String;)Z
+public boolean containsItem(List<String> items, String item);
+
+//签名：getItemCounts()Ljava/util/Map;
+public Map<String, Integer> getItemCounts();
+
+//签名：processArray([I)V
+public void processArray(int[] array);
+
+//复杂参数类型示例
+
+//签名：processMap(Ljava/util/Map;)V
+public void processMap(Map<String, List<Integer>> map);
+
+//签名：validateInput(Ljava/lang/String;C)Z
+public boolean validateInput(String input, char flag);
+```
+
 ### JNIEnv 主要功能：
 **1.创建Java对象**：
 ```
