@@ -36,5 +36,12 @@ public class JNI2 {
     public native void cCallJavaVoidMethod();
     public native void cCallJavaIntMethod();
     public native void cCallJavaStringMethod();
+
+    public native String encode(String str);//加密
+
+    public native String decode(String str);//解密
+
+    public native void startCThread(); //C++ 创建线程
+
 }
 

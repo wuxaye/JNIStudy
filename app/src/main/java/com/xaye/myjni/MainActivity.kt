@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.xaye.myjni.databinding.ActivityMainBinding
-import java.util.Arrays
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,7 +54,53 @@ class MainActivity : AppCompatActivity() {
         binding.btnFunString.setOnClickListener {
             jni2.cCallJavaStringMethod()
         }
+
+        //-------------------------------------------------------
+
+        //看具体代码，就是简单的地址转换，了解就行，因为这种会出现非法地址问题
+        //解密
+        binding.btnDecode.setOnClickListener {
+            var psd = binding.etView.text.toString()
+            psd = jni2.decode(psd)
+            binding.etView.setText(psd)
+        }
+        //加密
+        binding.btnEncode.setOnClickListener {
+            var psd = binding.etView.text.toString()
+            psd = jni2.encode(psd)
+            binding.etView.setText(psd)
+        }
+
+        //-------------------------------------------------------
+
+        binding.btnStart.setOnClickListener {
+            Thread{
+                startMonitor()
+            }.start()
+        }
+
+        binding.btnStop.setOnClickListener {
+            stopMonitor()
+        }
+
+        //-------------------------------------------------------
+
+        binding.btnCreateThread.setOnClickListener {
+            jni2.startCThread()
+        }
     }
+
+    private external fun startMonitor()
+
+    private external fun stopMonitor()
+
+    public fun updatePressure(value : Int) {
+        runOnUiThread {
+            binding.pb.progress = value
+        }
+    }
+
+
 
 
 }

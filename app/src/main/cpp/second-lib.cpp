@@ -1,5 +1,9 @@
 #include <jni.h>
 #include <android/log.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
 //#define 是预处理指令，用于定义宏，可以是常量、表达式或代码片段。
 #define LOG_TAG "SecondLib"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
@@ -30,7 +34,7 @@ Java_com_xaye_myjni_JNI2_cCallJavaVoidMethod(JNIEnv *env, jobject thiz) {
     env->CallVoidMethod(thiz, methodID);
 }
 
-void showToast(JNIEnv *env, jobject thiz) {
+void showToast(JNIEnv *env, jobject thiz, char* str) {
     //1.获取类的字节码
     jclass clazz = env->FindClass("com/xaye/myjni/JNI2");
 
@@ -41,7 +45,7 @@ void showToast(JNIEnv *env, jobject thiz) {
     jobject context = env->GetObjectField(thiz, fieldID);
 
     //4.创建Toast要显示的内容
-    jstring msg = env->NewStringUTF("I'm Toast from C++");
+    jstring msg = env->NewStringUTF(str);
 
     //5.获取Toast的字节码
     jclass toastClazz = env->FindClass("android/widget/Toast");
@@ -76,7 +80,9 @@ Java_com_xaye_myjni_JNI2_cCallJavaIntMethod(JNIEnv *env, jobject thiz) {
     //调用方法
     jint result = env->CallIntMethod(thiz, methodID, 1, 2);
 
-    showToast(env, thiz);
+    char* message = "Hello from C++!";
+
+    showToast(env, thiz,message);
     LOGI(" cCallJavaIntMethod result: %d",result);
 }
 
@@ -111,4 +117,95 @@ Java_com_xaye_myjni_JNI2_cCallJavaStringMethod(JNIEnv *env, jobject thiz) {
     // methodID: 获取到的方法 ID
     // jstr: 作为参数传递给 Java 方法的 jstring 对象
     env->CallVoidMethod(thiz, methodID, jstr);
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_xaye_myjni_JNI2_encode(JNIEnv *env, jobject thiz, jstring str) {
+
+    char * str_ = (char *) env->GetStringUTFChars(str, NULL);
+
+    int len = strlen(str_);
+
+    for (int i = 0; i < len; i++) {
+       *(str_ + i) += 3;
+    }
+
+    return env->NewStringUTF(str_);
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_xaye_myjni_JNI2_decode(JNIEnv *env, jobject thiz, jstring str) {
+
+    // 将 jstring 类型的 str 转换为 C 字符串 (UTF-8 格式)
+    char * str_ = (char *) env->GetStringUTFChars(str, NULL);
+
+    // 获取字符串的长度
+    int len = strlen(str_);
+
+    for (int i = 0; i < len; i++) {
+        // 将每个字符的 ASCII 值增加 3
+        *(str_ + i) -= 3; // *上一个地址 就是拿到该地址上的值
+    }
+
+    return env->NewStringUTF(str_);
+}
+
+int getPressure() {
+    return rand() % 100 + 1;
+}
+
+int startMonitor;
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_xaye_myjni_MainActivity_startMonitor(JNIEnv *env, jobject thiz) {
+    // 1. 获取字节码 (这里的参数 name 可以将文件的路径复制过来，然后 alt + enter 快捷键即可自动转换)
+    jclass clazz = env->FindClass("com/xaye/myjni/MainActivity");
+
+    // 2. 获取方法ID
+    jmethodID methodID = env->GetMethodID(clazz, "updatePressure", "(I)V");
+
+    startMonitor = 1;
+    while (startMonitor) {
+        int pressure = getPressure();
+        // 3. 调用方法
+        env->CallVoidMethod(thiz, methodID, pressure);
+        sleep(2);
+    }
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_xaye_myjni_MainActivity_stopMonitor(JNIEnv *env, jobject thiz) {
+    startMonitor = 0;
+}
+
+
+// 子线程执行的函数
+void* threadFunction(void* args) {
+    LOGI("子线程开始执行");
+    // 模拟耗时操作
+    for (int i = 0; i < 5; ++i) {
+        LOGI("子线程运行中: %d", i);
+        sleep(1);
+    }
+    LOGI("子线程结束");
+    return nullptr;
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_xaye_myjni_JNI2_startCThread(JNIEnv *env, jobject thiz) {
+    pthread_t thread;
+    int result = pthread_create(&thread, nullptr, threadFunction, nullptr);
+
+    if (result != 0) {
+        LOGI("无法创建线程: %d", result);
+    } else {
+        char* message = "线程创建成功";
+        LOGI("线程创建成功");
+        showToast(env, thiz,message);
+        pthread_detach(thread);  // 让线程在结束时自动释放资源
+    }
 }
