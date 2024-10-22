@@ -13,6 +13,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var jni2: JNI2
 
+    private lateinit var jnI3: JNI3
+
+
+    private var producerConsumerPtr: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         jni = JNI()
 
         jni2 = JNI2(applicationContext)
+
+        jnI3 = JNI3()
         //传递int
         binding.btnInt.setOnClickListener {
             val result = jni.passInt(3,4)
@@ -87,6 +94,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnCreateThread.setOnClickListener {
             jni2.startCThread()
+        }
+
+        //-------------------------------------------------------
+
+        binding.btnPcStart.setOnClickListener {
+            producerConsumerPtr = jnI3.startProducerConsumer()
+        }
+
+        binding.btnPcStop.setOnClickListener {
+            jnI3.stopProducerConsumer(producerConsumerPtr)
         }
     }
 

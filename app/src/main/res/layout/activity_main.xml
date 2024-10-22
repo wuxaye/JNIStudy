@@ -1,239 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="下面功能都是Java和JNI交互实现"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:gravity="center"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#00B8D4">
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="下面功能都是Java和JNI交互实现"/>
 
-            <TextView
-                android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="Java -> JNI -> Java"/>
+                android:background="#00B8D4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Java -> JNI -> Java"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_int"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="获取int" />
+
+                <Button
+                    android:id="@+id/btn_string"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="获取string" />
+
+                <Button
+                    android:id="@+id/btn_array"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="获取array" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
 
-            <Button
-                android:id="@+id/btn_int"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="获取int" />
+            <LinearLayout
+                android:gravity="center"
+                android:background="#0091EA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/btn_string"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="获取string" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="C++调用Java方法"/>
 
-            <Button
-                android:id="@+id/btn_array"
-                android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="获取array" />
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_fun_void"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="调用void" />
+
+                <Button
+                    android:id="@+id/btn_fun_int"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="调用int" />
+
+                <Button
+                    android:id="@+id/btn_fun_string"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="调用string" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:gravity="center"
+                android:background="#2962FF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="文本加解密"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/et_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入密码" />
+
+                <Button
+                    android:id="@+id/btn_encode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="加密"/>
+
+                <Button
+                    android:id="@+id/btn_decode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="解密"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:gravity="center"
+                android:background="#0091EA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="锅炉压力进度条(JNI -> Java)"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+
+                <Button
+                    android:id="@+id/btn_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="开启监控"/>
+
+                <Button
+                    android:id="@+id/btn_stop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="停止监控"/>
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@android:style/Widget.ProgressBar.Horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:gravity="center"
+                android:background="#0091EA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="C++创建子线程"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_create_thread"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="创建子线程" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:gravity="center"
+                android:background="#0091EA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="C++生产者消费者模型"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_pc_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="启动生产者消费者" />
+
+                <Button
+                    android:id="@+id/btn_pc_stop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="停止生产者消费者" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="5dp">
 
-        <LinearLayout
-            android:gravity="center"
-            android:background="#0091EA"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="C++调用Java方法"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/btn_fun_void"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="调用void" />
-
-            <Button
-                android:id="@+id/btn_fun_int"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="调用int" />
-
-            <Button
-                android:id="@+id/btn_fun_string"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="调用string" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="5dp">
-
-        <LinearLayout
-            android:gravity="center"
-            android:background="#2962FF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="文本加解密"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <EditText
-                android:id="@+id/et_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:hint="请输入密码" />
-
-            <Button
-                android:id="@+id/btn_encode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="加密"/>
-
-            <Button
-                android:id="@+id/btn_decode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="解密"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="5dp">
-
-        <LinearLayout
-            android:gravity="center"
-            android:background="#0091EA"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="锅炉压力进度条(JNI -> Java)"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-
-            <Button
-                android:id="@+id/btn_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="开启监控"/>
-
-            <Button
-                android:id="@+id/btn_stop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="停止监控"/>
-
-        </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/pb"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@android:style/Widget.ProgressBar.Horizontal" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="5dp">
-
-        <LinearLayout
-            android:gravity="center"
-            android:background="#0091EA"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="C++创建子线程"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/btn_create_thread"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="创建子线程" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

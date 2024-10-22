@@ -183,12 +183,13 @@ Java_com_xaye_myjni_MainActivity_stopMonitor(JNIEnv *env, jobject thiz) {
 
 
 // 子线程执行的函数
+// 参数 void* args 可以用于传递任何类型的数据
 void* threadFunction(void* args) {
     LOGI("子线程开始执行");
     // 模拟耗时操作
     for (int i = 0; i < 5; ++i) {
         LOGI("子线程运行中: %d", i);
-        sleep(1);
+        sleep(1);//暂停子线程1秒钟，模拟耗时操作。
     }
     LOGI("子线程结束");
     return nullptr;
@@ -198,8 +199,17 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_com_xaye_myjni_JNI2_startCThread(JNIEnv *env, jobject thiz) {
     pthread_t thread;
+
+    /*
+     * pthread_create 函数创建一个新线程
+     * &thread：传入指针以接收新线程的ID。
+     * nullptr：线程属性，设置为 nullptr 使用默认属性。
+     * threadFunction：指定线程执行的函数。
+     * nullptr：传递给线程函数的参数。
+     * */
     int result = pthread_create(&thread, nullptr, threadFunction, nullptr);
 
+    //检查线程创建是否成功，result 返回值为0表示成功，其他值表示错误。
     if (result != 0) {
         LOGI("无法创建线程: %d", result);
     } else {

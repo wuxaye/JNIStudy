@@ -19,15 +19,11 @@ add_library( # Sets the name of the library.
         # Provides a relative path to your source file(s).
         native-lib.cpp)
 
-# 创建的第二个so
-add_library( # Sets the name of the library.
-        mysecondlib
+# 第二个库
+add_library(mysecondlib SHARED second-lib.cpp)
 
-        # Sets the library as a shared library.
-        SHARED
-
-        # Provides a relative path to your source file(s).
-        second-lib.cpp)
+# 生产者消费者模型库
+add_library(pclib SHARED producer_consumer.cpp)
 
 find_library( # Sets the name of the path variable.
         log-lib
@@ -43,9 +39,8 @@ target_link_libraries( # Specifies the target library.
         # included in the NDK.
         ${log-lib})
 
-target_link_libraries( # Specifies the target library.
-        mysecondlib
+# 第二个库
+target_link_libraries(mysecondlib ${log-lib})
 
-        # Links the target library to the log library
-        # included in the NDK.
-        ${log-lib})
+# 生产者消费者模型库
+target_link_libraries(pclib ${log-lib})
