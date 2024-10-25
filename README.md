@@ -81,8 +81,10 @@ Java_com_zqf_jnitest_MainActivity_stringFromJNI(JNIEnv *env, jobject /* this */)
 - `env` 是一个指向 `JNIEnv` 的指针，必须使用 `->` 来调用 `NewStringUTF` 方法
 
 
-### Java 方法签名的表示
+### Java 方法签名的表示（重点）
 在JNI中，调用Java方法时，需要提供方法签名，以确定方法参数和返回值的类型。在JNI中，方法签名由方法名、参数类型和返回值类型组成。
+
+【方法签名是必须了解的，没必要全背会，但要能看懂，在写JNI代码的时候，方法签名快捷键可以一键生成。】
 
 - 基本数据类型：
     - `V`：void
