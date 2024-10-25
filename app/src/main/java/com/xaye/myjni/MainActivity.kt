@@ -4,6 +4,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.xaye.myjni.databinding.ActivityMainBinding
+import com.xaye.myjni.jni.JNI
+import com.xaye.myjni.jni.JNI2
+import com.xaye.myjni.jni.JNI3
+import com.xaye.myjni.jni.SerialPort
+import com.xaye.myjni.util.HexUtil.hexToByteArray
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var jni2: JNI2
 
     private lateinit var jnI3: JNI3
+
+    private lateinit var serialPort: SerialPort
 
 
     private var producerConsumerPtr: Long = 0
@@ -28,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         jni2 = JNI2(applicationContext)
 
         jnI3 = JNI3()
+
+        serialPort = SerialPort()
         //传递int
         binding.btnInt.setOnClickListener {
             val result = jni.passInt(3,4)
@@ -105,7 +114,30 @@ class MainActivity : AppCompatActivity() {
         binding.btnPcStop.setOnClickListener {
             jnI3.stopProducerConsumer(producerConsumerPtr)
         }
+
+        //-------------------------------------------------------
+
+        binding.btnPortOpen.setOnClickListener {
+           val result = serialPort.open("/dev/ttyS3", 9600, 8, 1, 'N')
+
+            Toast.makeText(this, "打开: $result", Toast.LENGTH_SHORT).show()
+
+            serialPort.startReceiving()
+
+        }
+
+        binding.btnPortSend.setOnClickListener {
+            val bytes = hexToByteArray("737461728A0101119b656E646F")
+            serialPort.write(bytes)
+        }
+
+        binding.btnPortStop.setOnClickListener {
+            serialPort.stopReceiving()
+        }
     }
+
+
+
 
     private external fun startMonitor()
 

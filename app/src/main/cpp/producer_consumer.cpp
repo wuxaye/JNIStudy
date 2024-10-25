@@ -111,7 +111,7 @@ private:
 
 extern "C"
 JNIEXPORT jlong JNICALL
-Java_com_xaye_myjni_JNI3_startProducerConsumer(JNIEnv *env, jobject thiz) {
+Java_com_xaye_myjni_jni_JNI3_startProducerConsumer(JNIEnv *env, jobject thiz) {
 
     auto *pc = new ProducerConsumer();
 
@@ -129,7 +129,7 @@ Java_com_xaye_myjni_JNI3_startProducerConsumer(JNIEnv *env, jobject thiz) {
  * */
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_xaye_myjni_JNI3_stopProducerConsumer(JNIEnv *env, jobject thiz, jlong ptr) {
+Java_com_xaye_myjni_jni_JNI3_stopProducerConsumer(JNIEnv *env, jobject thiz, jlong ptr) {
 
     // 将传入的 jlong 指针转换回 ProducerConsumer 类型的指针
     auto *pc = reinterpret_cast<ProducerConsumer *>(ptr);

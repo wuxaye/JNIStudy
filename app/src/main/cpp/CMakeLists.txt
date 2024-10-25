@@ -25,6 +25,9 @@ add_library(mysecondlib SHARED second-lib.cpp)
 # 生产者消费者模型库
 add_library(pclib SHARED producer_consumer.cpp)
 
+#串口
+add_library(serialportlib SHARED serial_port.cpp)
+
 find_library( # Sets the name of the path variable.
         log-lib
 
@@ -44,3 +47,6 @@ target_link_libraries(mysecondlib ${log-lib})
 
 # 生产者消费者模型库
 target_link_libraries(pclib ${log-lib})
+
+#串口
+target_link_libraries(serialportlib ${log-lib})

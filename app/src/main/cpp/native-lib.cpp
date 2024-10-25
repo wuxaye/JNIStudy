@@ -9,7 +9,7 @@
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_xaye_myjni_JNI_passInt(JNIEnv *env, jobject thiz, jint x, jint y) {
+Java_com_xaye_myjni_jni_JNI_passInt(JNIEnv *env, jobject thiz, jint x, jint y) {
     int result = x + y;
     LOGI("调用了passInt，返回值：%d",result);
     return result;
@@ -17,7 +17,7 @@ Java_com_xaye_myjni_JNI_passInt(JNIEnv *env, jobject thiz, jint x, jint y) {
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_xaye_myjni_JNI_passString(JNIEnv *env, jobject thiz, jstring str) {
+Java_com_xaye_myjni_jni_JNI_passString(JNIEnv *env, jobject thiz, jstring str) {
     // 将 jstring 转换为 std::string, std::string 是一个标准库提供的字符串类，
     // 可以这样写 std::string str = "Hello, World!"; 类似于Java String str = "Hello, World!";
     const char *inputCStr = env->GetStringUTFChars(str, nullptr);
@@ -39,7 +39,7 @@ Java_com_xaye_myjni_JNI_passString(JNIEnv *env, jobject thiz, jstring str) {
 
 extern "C"
 JNIEXPORT jintArray JNICALL
-Java_com_xaye_myjni_JNI_passArray(JNIEnv *env, jobject thiz, jintArray array) {
+Java_com_xaye_myjni_jni_JNI_passArray(JNIEnv *env, jobject thiz, jintArray array) {
     // 获取 jintArray 中的元素指针,也就是第一个元素的内存地址
     jint *p = env->GetIntArrayElements(array, nullptr);
     // 获取数组的长度

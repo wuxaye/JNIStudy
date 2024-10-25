@@ -1,4 +1,4 @@
-package com.xaye.myjni;
+package com.xaye.myjni.jni;
 
 /**
  * Author xaye

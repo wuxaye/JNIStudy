@@ -11,12 +11,12 @@
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_xaye_myjni_JNI2_cCallJavaVoidMethod(JNIEnv *env, jobject thiz) {
+Java_com_xaye_myjni_jni_JNI2_cCallJavaVoidMethod(JNIEnv *env, jobject thiz) {
    // com/xaye/myjni/JNI2.java
 
     //1.获取类的字节码
     //Class<Test> clazz = Test.class;
-    jclass clazz = env->FindClass("com/xaye/myjni/JNI2");
+    jclass clazz = env->FindClass("com/xaye/myjni/jni/JNI2");
 
     //2.通过字节码获取方法
     // Method method = clazz.getDeclaredMethod("print", String.class);
@@ -36,7 +36,7 @@ Java_com_xaye_myjni_JNI2_cCallJavaVoidMethod(JNIEnv *env, jobject thiz) {
 
 void showToast(JNIEnv *env, jobject thiz, char* str) {
     //1.获取类的字节码
-    jclass clazz = env->FindClass("com/xaye/myjni/JNI2");
+    jclass clazz = env->FindClass("com/xaye/myjni/jni/JNI2");
 
     //2.获取字段（成员方法）的ID
     jfieldID fieldID = env->GetFieldID(clazz, "context", "Landroid/content/Context;");
@@ -69,10 +69,10 @@ void showToast(JNIEnv *env, jobject thiz, char* str) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_xaye_myjni_JNI2_cCallJavaIntMethod(JNIEnv *env, jobject thiz) {
+Java_com_xaye_myjni_jni_JNI2_cCallJavaIntMethod(JNIEnv *env, jobject thiz) {
 
     //1.获取类的字节码
-    jclass clazz = env->FindClass("com/xaye/myjni/JNI2");
+    jclass clazz = env->FindClass("com/xaye/myjni/jni/JNI2");
 
     //2.通过字节码获取方法
     jmethodID methodID = env->GetMethodID(clazz, "add", "(II)I");
@@ -89,12 +89,12 @@ Java_com_xaye_myjni_JNI2_cCallJavaIntMethod(JNIEnv *env, jobject thiz) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_xaye_myjni_JNI2_cCallJavaStringMethod(JNIEnv *env, jobject thiz) {
+Java_com_xaye_myjni_jni_JNI2_cCallJavaStringMethod(JNIEnv *env, jobject thiz) {
 
     //1.获取类的字节码
     // 使用 JNIEnv 的 FindClass 方法查找名为 "com/xaye/myjni/JNI2" 的 Java 类
     // "com/xaye/myjni/JNI2" 是 Java 中类的完整路径名，使用 '/' 替代 '.'。
-    jclass clazz = env->FindClass("com/xaye/myjni/JNI2");
+    jclass clazz = env->FindClass("com/xaye/myjni/jni/JNI2");
 
     //2.通过字节码获取方法
     // GetMethodID 方法用于获取指定方法的 ID。此方法的参数包括：
@@ -121,7 +121,7 @@ Java_com_xaye_myjni_JNI2_cCallJavaStringMethod(JNIEnv *env, jobject thiz) {
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_xaye_myjni_JNI2_encode(JNIEnv *env, jobject thiz, jstring str) {
+Java_com_xaye_myjni_jni_JNI2_encode(JNIEnv *env, jobject thiz, jstring str) {
 
     char * str_ = (char *) env->GetStringUTFChars(str, NULL);
 
@@ -136,7 +136,7 @@ Java_com_xaye_myjni_JNI2_encode(JNIEnv *env, jobject thiz, jstring str) {
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_xaye_myjni_JNI2_decode(JNIEnv *env, jobject thiz, jstring str) {
+Java_com_xaye_myjni_jni_JNI2_decode(JNIEnv *env, jobject thiz, jstring str) {
 
     // 将 jstring 类型的 str 转换为 C 字符串 (UTF-8 格式)
     char * str_ = (char *) env->GetStringUTFChars(str, NULL);
@@ -197,7 +197,7 @@ void* threadFunction(void* args) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_xaye_myjni_JNI2_startCThread(JNIEnv *env, jobject thiz) {
+Java_com_xaye_myjni_jni_JNI2_startCThread(JNIEnv *env, jobject thiz) {
     pthread_t thread;
 
     /*
